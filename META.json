@@ -47,6 +47,8 @@
       },
       "runtime" : {
          "requires" : {
+            "Crypt::PRNG" : "0.041",
+            "Crypt::ScryptKDF" : "0.010",
             "Mojolicious" : "7.10"
          }
       }
