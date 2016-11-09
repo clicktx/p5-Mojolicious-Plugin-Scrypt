@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/clicktx/p5-Mojolicious-Plugin-Scrypt.svg?branch=master)](https://travis-ci.org/clicktx/p5-Mojolicious-Plugin-Scrypt)
 # NAME
 
 Mojolicious::Plugin::Scrypt - Mojolicious Plugin
