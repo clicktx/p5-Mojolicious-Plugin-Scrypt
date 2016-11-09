@@ -52,6 +52,17 @@
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/clicktx/p5-Mojolicious-Plugin-Scrypt/issues"
+      },
+      "homepage" : "https://github.com/clicktx/p5-Mojolicious-Plugin-Scrypt",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/clicktx/p5-Mojolicious-Plugin-Scrypt.git",
+         "web" : "https://github.com/clicktx/p5-Mojolicious-Plugin-Scrypt"
+      }
+   },
    "version" : "0.01",
    "x_authority" : "cpan:CLICKTX"
 }
