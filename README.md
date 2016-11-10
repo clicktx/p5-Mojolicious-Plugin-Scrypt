@@ -72,9 +72,3 @@ Munenori Sugimura <clicktx@gmail.com>
 
 This module is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself. See [perlartistic](https://metacpan.org/pod/perlartistic).
-
-# LICENSE of Mojolicious::Plugin::I18N
-
-Mojolicious::Plugin::LocaleTextDomainOO uses Mojolicious::Plugin::I18N code. Here is LICENSE of Mojolicious::Plugin::I18N
-
-This program is free software, you can redistribute it and/or modify it under the terms of the Artistic License version 2.0.

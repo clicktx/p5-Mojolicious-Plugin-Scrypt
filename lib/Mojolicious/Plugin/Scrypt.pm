@@ -114,10 +114,4 @@ L<Crypt::ScryptKDF>, L<Mojolicious>, L<Mojolicious::Guides>, L<http://mojoliciou
 This module is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself. See L<perlartistic>.
 
-=head1 LICENSE of Mojolicious::Plugin::I18N
-
-Mojolicious::Plugin::LocaleTextDomainOO uses Mojolicious::Plugin::I18N code. Here is LICENSE of Mojolicious::Plugin::I18N
-
-This program is free software, you can redistribute it and/or modify it under the terms of the Artistic License version 2.0.
-
 =cut
