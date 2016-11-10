@@ -1,12 +1,12 @@
 {
-   "abstract" : "Mojolicious Plugin",
+   "abstract" : "Scrypt password for Mojolicious",
    "author" : [
       "Munenori Sugimura <clicktx@gmail.com>"
    ],
    "dynamic_config" : 0,
    "generated_by" : "Minilla/v3.0.4, CPAN::Meta::Converter version 2.143240",
    "license" : [
-      "unknown"
+      "perl_5"
    ],
    "meta-spec" : {
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",

@@ -41,7 +41,7 @@ __END__
 
 =head1 NAME
 
-Mojolicious::Plugin::Scrypt - Mojolicious Plugin
+Mojolicious::Plugin::Scrypt - Scrypt password for Mojolicious
 
 =head1 SYNOPSIS
 
@@ -51,14 +51,49 @@ Mojolicious::Plugin::Scrypt - Mojolicious Plugin
   # Mojolicious::Lite
   plugin 'Scrypt';
 
+=head2 Plugin Configurations
+
+    $self->plugin( 'Scrypt', {
+        salt_length     => int,     # default: 32
+        cost            => int,     # default: 16384
+        block_size      => int,     # default: 8
+        parallelism     => int,     # default: 1
+        derived_length  => int,     # default: 32
+    });
+
+For more infomation see L<Crypt::ScryptKDF>.
+
 =head1 DESCRIPTION
 
 L<Mojolicious::Plugin::Scrypt> is a L<Mojolicious> plugin.
 
-=head1 METHODS
+=head1 HELPERS
 
-L<Mojolicious::Plugin::Scrypt> inherits all methods from
-L<Mojolicious::Plugin> and implements the following new ones.
+=head2 scrypt
+
+    my $encoded = $app->scrypt($password);
+
+    my $salt = 'saltSalt';
+    my $encoded2 = $app->scrypt($password, $salt);
+
+=head2 scrypt_verify
+
+    sub login {
+        my $c = shift;
+        my $password = $c->param('password');
+        my $encoded = get_hash_from_db();
+
+        if ( $c->scrypt_verify($password, $encoded) ){
+            # Authenticated
+            ...
+        } else {
+            # Fail
+            ...
+        }
+    }
+
+
+=head1 METHODS
 
 =head2 register
 
@@ -72,6 +107,17 @@ Munenori Sugimura <clicktx@gmail.com>
 
 =head1 SEE ALSO
 
-L<Mojolicious>, L<Mojolicious::Guides>, L<http://mojolicious.org>.
+L<Crypt::ScryptKDF>, L<Mojolicious>, L<Mojolicious::Guides>, L<http://mojolicious.org>.
+
+=head1 LICENSE
+
+This module is free software; you can redistribute it and/or
+modify it under the same terms as Perl itself. See L<perlartistic>.
+
+=head1 LICENSE of Mojolicious::Plugin::I18N
+
+Mojolicious::Plugin::LocaleTextDomainOO uses Mojolicious::Plugin::I18N code. Here is LICENSE of Mojolicious::Plugin::I18N
+
+This program is free software, you can redistribute it and/or modify it under the terms of the Artistic License version 2.0.
 
 =cut
