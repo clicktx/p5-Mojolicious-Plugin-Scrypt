@@ -10,7 +10,6 @@ get '/crypt' => sub {
     my $c = shift;
     my ( $p, $s ) = map { $c->param($_) } qw/p s/;
     my $encoded = $c->scrypt( $p, $s );
-
     $c->render( text => $encoded );
 };
 
@@ -31,6 +30,7 @@ for (@data) {
 
     $t->get_ok( "/crypt" => form => { p => $password, s => $salt } )->status_is(200)
       ->content_is($encoded);
+    $t->get_ok( "/crypt" => form => { p => $password } )->status_is(200)->content_isnt($encoded);
     $t->get_ok( "/verify" => form => { p => $password, e => $encoded } )->status_is(200)
       ->content_is('Pass');
 }

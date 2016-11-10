@@ -1,18 +1,25 @@
 package Mojolicious::Plugin::Scrypt;
 use Mojo::Base 'Mojolicious::Plugin';
-use Crypt::ScryptKDF qw/scrypt_hash scrypt_hash_verify random_bytes/;
+use Crypt::ScryptKDF qw/scrypt_hash scrypt_hash_verify/;
 
 our $VERSION = '0.01';
 
 sub register {
     my ( $self, $app, $conf ) = @_;
+    my $salt_len = $conf->{salt_length}    || 32;
+    my $N        = $conf->{cost}           || 16384;
+    my $r        = $conf->{block_size}     || 8;
+    my $p        = $conf->{parallelism}    || 1;
+    my $len      = $conf->{derived_length} || 32;
 
     $app->helper(
         scrypt => sub {
             my $c = shift;
-            my ( $secret, $salt ) = ( shift, shift || _salt() );
-
-            return scrypt_hash( $secret, $salt );
+            my ( $secret, $salt ) = @_;
+            unless ($salt) {
+                return scrypt_hash( $secret, \$salt_len, $N, $r, $p, $len );
+            }
+            return scrypt_hash( $secret, $salt, $N, $r, $p, $len );
         }
     );
 
@@ -25,11 +32,6 @@ sub register {
             return scrypt_hash_verify( $plain, $encoded );
         }
     );
-}
-
-sub _salt {
-    my $len = shift || 20;
-    random_bytes($len);
 }
 
 1;
