@@ -41,7 +41,7 @@ __END__
 
 =head1 NAME
 
-Mojolicious::Plugin::Scrypt - Scrypt password for Mojolicious
+Mojolicious::Plugin::Scrypt - Scrypt salted password hashing for Mojolicious
 
 =head1 SYNOPSIS
 
@@ -65,7 +65,8 @@ For more infomation see L<Crypt::ScryptKDF>.
 
 =head1 DESCRIPTION
 
-L<Mojolicious::Plugin::Scrypt> is a L<Mojolicious> plugin.
+L<Mojolicious::Plugin::Scrypt> module use Scrypt algorithm creates a password hash.
+Other encryption algorithms include Argon2 or PBKDF2, Bcrypt and more.
 
 =head1 HELPERS
 
@@ -73,21 +74,30 @@ L<Mojolicious::Plugin::Scrypt> is a L<Mojolicious> plugin.
 
     my $encoded = $app->scrypt($password);
 
-    my $salt = 'saltSalt';
+Use random salt, default length 32.
+
+    # or use your salt
+    my $salt     = 'saltSalt';
     my $encoded2 = $app->scrypt($password, $salt);
+
+B<Do you want to generate salt?>
+
+L<Mojolicious::Plugin::Scrypt> using L<Crypt::PRNG>.
+You can use C<Crypt::PRNG::random_bytes()>, C<Crypt::PRNG::random_string()>, ...and more.
+
 
 =head2 scrypt_verify
 
     sub login {
-        my $c = shift;
+        my $c        = shift;
         my $password = $c->param('password');
-        my $encoded = get_hash_from_db();
+        my $encoded  = get_hash_from_db();
 
         if ( $c->scrypt_verify($password, $encoded) ){
-            # Authenticated
+            # Correct
             ...
         } else {
-            # Fail
+            # Incorrect
             ...
         }
     }

@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/clicktx/p5-Mojolicious-Plugin-Scrypt.svg?branch=master)](https://travis-ci.org/clicktx/p5-Mojolicious-Plugin-Scrypt)
 # NAME
 
-Mojolicious::Plugin::Scrypt - Scrypt password for Mojolicious
+Mojolicious::Plugin::Scrypt - Scrypt salted password hashing for Mojolicious
 
 # SYNOPSIS
 
@@ -25,7 +25,8 @@ For more infomation see [Crypt::ScryptKDF](https://metacpan.org/pod/Crypt::Scryp
 
 # DESCRIPTION
 
-[Mojolicious::Plugin::Scrypt](https://metacpan.org/pod/Mojolicious::Plugin::Scrypt) is a [Mojolicious](https://metacpan.org/pod/Mojolicious) plugin.
+[Mojolicious::Plugin::Scrypt](https://metacpan.org/pod/Mojolicious::Plugin::Scrypt) module use Scrypt algorithm creates a password hash.
+Other encryption algorithms include Argon2 or PBKDF2, Bcrypt and more.
 
 # HELPERS
 
@@ -33,21 +34,29 @@ For more infomation see [Crypt::ScryptKDF](https://metacpan.org/pod/Crypt::Scryp
 
     my $encoded = $app->scrypt($password);
 
-    my $salt = 'saltSalt';
+Use random salt, default length 32.
+
+    # or use your salt
+    my $salt     = 'saltSalt';
     my $encoded2 = $app->scrypt($password, $salt);
+
+**Do you want to generate salt?**
+
+[Mojolicious::Plugin::Scrypt](https://metacpan.org/pod/Mojolicious::Plugin::Scrypt) using [Crypt::PRNG](https://metacpan.org/pod/Crypt::PRNG).
+You can use `Crypt::PRNG::random_bytes()`, `Crypt::PRNG::random_string()`, ...and more.
 
 ## scrypt\_verify
 
     sub login {
-        my $c = shift;
+        my $c        = shift;
         my $password = $c->param('password');
-        my $encoded = get_hash_from_db();
+        my $encoded  = get_hash_from_db();
 
         if ( $c->scrypt_verify($password, $encoded) ){
-            # Authenticated
+            # Correct
             ...
         } else {
-            # Fail
+            # Incorrect
             ...
         }
     }

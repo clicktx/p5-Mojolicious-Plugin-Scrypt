@@ -1,5 +1,5 @@
 {
-   "abstract" : "Scrypt password for Mojolicious",
+   "abstract" : "Scrypt salted password hashing for Mojolicious",
    "author" : [
       "Munenori Sugimura <clicktx@gmail.com>"
    ],
